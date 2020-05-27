@@ -7,9 +7,9 @@
 <script>
 import navbar from "./components/layouts/navbar";
 export default {
-  name: "main",
+  name: "App",
   components: {
-    navbar,
+    navbar
   }
 };
 </script>
