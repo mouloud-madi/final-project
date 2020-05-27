@@ -2,7 +2,7 @@
   <b-container class="bv-example-row mt-5">
     <b-row>
       <b-col>
-        <h3>Add new graph</h3>
+        <h3>Edit graph</h3>
       </b-col>
       <b-col class="text-right">
         <router-link class="btn btn-primary" to="/">
@@ -10,10 +10,11 @@
         </router-link>
       </b-col>
     </b-row>
-    <hr>
+    <hr />
+
     <b-row class="justify-content-center">
       <b-col cols="8">
-        <form v-on:submit.prevent="Addgraph">
+        <form v-on:submit.prevent="UpdateInfograph(graph[0].id)">
           <b-row class="my-1">
             <b-col sm="2">
               <label for="name">
@@ -39,50 +40,58 @@
             <b-col sm="2"></b-col>
             <b-col sm="10 mt-2">
               <button class="btn btn-primary" :disabled="!name || name.length < 3">
-                <b-icon icon="file-arrow-down"></b-icon> Save
+                <b-icon icon="file-arrow-down"></b-icon>Save
               </button>
               <router-link to="/" class="btn btn-danger ml-1">
-                <b-icon icon="x-circle"></b-icon> Cancel
+                <b-icon icon="x-circle"></b-icon>Cancel
               </router-link>
             </b-col>
           </b-row>
         </form>
       </b-col>
     </b-row>
+    <hr>
+
+
+
+    
   </b-container>
 </template>
 
 <script>
-import {Getdata,Updatedata} from '../storage.js'
+import { Getdata, Updatedata } from "../storage.js";
 import moment from 'moment'
 export default {
-  name: "create",
+  name: "edit",
   data() {
     return {
+      graph: Getdata().filter(data => data.id == this.$route.params.id),
       graphs: Getdata(),
-      id :'',
-      name : '',
-      description : '',
-      created_at : '',
-      updated_at : '',
-
+      id: "",
+      name: "",
+      description: "",
+      created_at: "",
+      updated_at: ""
     };
   },
-  methods: {
-     Addgraph :function(){
-      this.graphs.unshift(
-        { 
-         id: new Date().getTime(),
-         name:this.name,
-         description:this.description,
-         created_at:moment().format('l h:mm:ss'),
-         updated_at:'',
-        });
-        this.$vToastify.success("The data has been added successfully");
-        Updatedata(this.graphs)
-        this.$router.push({name:'home'});
-      },
 
+  methods: {
+    UpdateInfograph: function(id) {
+      for (var i = 0; i < this.graphs.length; i++) {
+        if (this.graphs[i].id === id) {
+          this.graphs[i].name = this.name;
+          this.graphs[i].description = this.description;
+          this.graphs[i].updated_at = moment().format('l h:mm:ss');
+        }
+      }
+      this.$vToastify.success("The data has been Updated successfully");
+      Updatedata(this.graphs);
+      this.$router.push({ name: "home" });
+    }
+  },
+  created() {
+    this.name = this.graph[0].name;
+    this.description = this.graph[0].description;
   }
 };
 </script>

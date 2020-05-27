@@ -1,3 +1,4 @@
+//graphs
 export const Getdata = () => {
     return JSON.parse(localStorage.getItem('graphs')) ? JSON.parse(localStorage.getItem('graphs')) : []
 }

@@ -13,7 +13,7 @@
       </b-col>
     </b-row>
     <hr />
-    <table class="table table-striped table-inverse table-bordered">
+    <table class="table table-striped table-inverse table-bordered table-hover">
       <thead class="thead-inverse">
         <tr>
           <th>Name</th>
@@ -29,15 +29,19 @@
           <td>{{graph.created_at}}</td>
           <td>
             <div class="btn-group">
+
               <button class="btn btn-sm btn-light" @click="remove(index)">
                 <b-icon icon="trash"></b-icon>
               </button>
-              <button class="btn btn-sm btn-light">
+              
+              <router-link class="btn btn-sm btn-light" :to="'/graphs/'+ graph.id +'/edit'">
                 <b-icon icon="pencil"></b-icon>
-              </button>
-              <button class="btn btn-sm btn-light">
+              </router-link>
+              
+              <router-link class="btn btn-sm btn-light" :to="'/graphs/' + graph.id">
                 <b-icon icon="eye"></b-icon>
-              </button>
+              </router-link>
+
             </div>
           </td>
         </tr>
