@@ -38,12 +38,12 @@
 
           <b-row class="my-1">
             <b-col sm="2"></b-col>
-            <b-col sm="10">
+            <b-col sm="10 mt-2">
               <button class="btn btn-primary" :disabled="!name || name.length < 3">
-                <b-icon icon="file-arrow-down"></b-icon>Save
+                <b-icon icon="file-arrow-down"></b-icon> Save
               </button>
               <router-link to="/" class="btn btn-danger ml-1">
-                <b-icon icon="x-circle"></b-icon>Cancel
+                <b-icon icon="x-circle"></b-icon> Cancel
               </router-link>
             </b-col>
           </b-row>
@@ -79,12 +79,10 @@ export default {
          created_at:moment().format('l'),
          updated_at:'',
         });
-        this.$vToastify.success("The data has been added successfully !");
+        this.$vToastify.success("The data has been added successfully");
         Updatedata(this.graphs)
-        this.name = ""
-        this.description = ""
+        this.$router.push({name:'home'});
       },
-
 
   }
 };
