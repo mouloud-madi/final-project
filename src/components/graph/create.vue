@@ -2,7 +2,7 @@
   <b-container class="bv-example-row mt-5">
     <b-row>
       <b-col>
-        <h3>Add new graph</h3>
+        <h4>Add new graph</h4>
       </b-col>
       <b-col class="text-right">
         <router-link class="btn btn-primary" to="/">

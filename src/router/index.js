@@ -4,6 +4,7 @@ import home from "../components/graph/index.vue";
 import create from "../components/graph/create.vue";
 import edit from "../components/graph/edit.vue";
 import view from "../components/graph/view.vue";
+import statistics from "../components/graph/statistics.vue";
 
 Vue.use(VueRouter);
 
@@ -18,11 +19,16 @@ const routes = [
     name: "create",
     component: create
   },
-   {
+  {
     path: "/graphs/:id/edit",
     name: "edit",
     component: edit
-  }, 
+  },
+  {
+    path: "/graphs/:id/statistics",
+    name: "statistics",
+    component: statistics
+  },
   {
     path: "/graphs/:id",
     name: "view",

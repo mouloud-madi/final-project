@@ -2,7 +2,7 @@
    <b-container class="bv-example-row mt-5">
     <b-row>
       <b-col>
-      <h3> <b-icon icon="graph-down"></b-icon>Graphs</h3>
+      <h4> <b-icon icon="graph-down"></b-icon>Graphs</h4>
       </b-col>
       <b-col class="text-right">
         <router-link class="btn btn-primary" to="/">

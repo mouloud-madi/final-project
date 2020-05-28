@@ -2,9 +2,9 @@
   <b-container class="bv-example-row mt-5">
     <b-row>
       <b-col>
-        <h3>
+        <h4>
           <b-icon icon="graph-down"></b-icon>Graphs
-        </h3>
+        </h4>
       </b-col>
       <b-col class="text-right">
         <router-link class="btn btn-primary" to="/create">
@@ -30,15 +30,19 @@
           <td>
             <div class="btn-group">
 
-              <button class="btn btn-sm btn-light" @click="remove(index)">
+              <button v-b-tooltip.hover title="Delete" class="btn btn-sm btn-light" @click="remove(index)">
                 <b-icon icon="trash"></b-icon>
               </button>
               
-              <router-link class="btn btn-sm btn-light" :to="'/graphs/'+ graph.id +'/edit'">
+              <router-link v-b-tooltip.hover title="Update" class="btn btn-sm btn-light" :to="'/graphs/'+ graph.id +'/edit'">
                 <b-icon icon="pencil"></b-icon>
               </router-link>
               
-              <router-link class="btn btn-sm btn-light" :to="'/graphs/' + graph.id">
+              <router-link v-b-tooltip.hover title="Statistics" class="btn btn-sm btn-light" :to="'/graphs/'+ graph.id +'/statistics'">
+                <b-icon icon="bar-chart"></b-icon>
+              </router-link>
+              
+              <router-link v-b-tooltip.hover title="View" class="btn btn-sm btn-light" :to="'/graphs/' + graph.id">
                 <b-icon icon="eye"></b-icon>
               </router-link>
 
