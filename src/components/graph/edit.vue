@@ -114,7 +114,7 @@
                   
                   <button v-b-tooltip.hover title="Add relation"
                   ref="btnshow"
-                   @click="showModal(node.id)"
+                   @click="showModal(node.id,node.tooltip)"
                    class="btn btn-sm btn-light">
                     <b-icon icon="bounding-box"></b-icon>
                   </button>
@@ -228,8 +228,9 @@ export default {
   methods: {
 
    // show model add relation
-    showModal: function(id) {
+    showModal: function(id,tooltip) {
       this.node_id = id
+      this.tooltip = tooltip
       this.$root.$emit('bv::show::modal', 'bv-modal-example2', '#btnShow')
     },
 
@@ -238,6 +239,7 @@ export default {
        this.relations.unshift({
         id: new Date().getTime(),
         node_id: this.node_id,
+        tooltip: this.tooltip,
         relation_node_ids:  this.relation_node_ids.toString(),
         graph_id : this.$route.params.id
       });
