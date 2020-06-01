@@ -12,7 +12,8 @@
         </router-link>
       </b-col>
     </b-row>
-    <hr />
+    <hr/>
+     <input type="text" v-model="search" class="form-control mb-3 col-4 float-right" placeholder="Search..."/>
     <table class="table table-striped table-inverse table-bordered table-hover">
       <thead class="thead-inverse">
         <tr>
@@ -22,27 +23,28 @@
           <th width="5%">Actions</th>
         </tr>
       </thead>
-      <tbody v-if="graphs.length > 0">
-        <tr v-for="(graph,index) in graphs" :key="graph.id">
-          <td>{{graph.name}}</td>
-          <td>{{graph.description}}</td>
-          <td>{{graph.created_at}}</td>
+      <tbody >
+ 
+        <tr v-for="(item,index) in filteredResources" :key="item.id">
+          <td>{{item.name}}</td>
+          <td>{{item.description}}</td>
+          <td>{{item.created_at}}</td>
           <td>
             <div class="btn-group">
 
               <button v-b-tooltip.hover title="Delete" class="btn btn-sm btn-light" @click="remove(index)">
                 <b-icon icon="trash"></b-icon>
               </button>
-              
-              <router-link v-b-tooltip.hover title="Update" class="btn btn-sm btn-light" :to="'/graphs/'+ graph.id +'/edit'">
+            
+              <router-link v-b-tooltip.hover title="Update" class="btn btn-sm btn-light" :to="'/graphs/'+ item.id +'/edit'">
                 <b-icon icon="pencil"></b-icon>
               </router-link>
               
-              <router-link v-b-tooltip.hover title="Statistics" class="btn btn-sm btn-light" :to="'/graphs/'+ graph.id +'/statistics'">
+              <router-link v-b-tooltip.hover title="Statistics" class="btn btn-sm btn-light" :to="'/graphs/'+ item.id +'/statistics'">
                 <b-icon icon="bar-chart"></b-icon>
               </router-link>
               
-              <router-link v-b-tooltip.hover title="View" class="btn btn-sm btn-light" :to="'/graphs/' + graph.id">
+              <router-link v-b-tooltip.hover title="View" class="btn btn-sm btn-light" :to="'/graphs/' + item.id">
                 <b-icon icon="eye"></b-icon>
               </router-link>
 
@@ -50,9 +52,7 @@
           </td>
         </tr>
       </tbody>
-      <tr v-else>
-        <td colspan="5" class="text-center bg-light">There is no data !</td>
-      </tr>
+    
     </table>
   </b-container>
 </template>
@@ -63,7 +63,8 @@ export default {
   name: "home",
   data() {
     return {
-      graphs: Getdata()
+      search :'',
+      data: Getdata()
     };
   },
   methods: {
@@ -74,12 +75,25 @@ export default {
         showCancelButton: true
       }).then(result => {
         if (result.value) {
-          this.$delete(this.graphs, index);
+          this.$delete(this.data, index);
           this.$vToastify.success("The data has been deleted successfully");
-          Updatedata(this.graphs);
+          Updatedata(this.data);
         }
       });
     }
+  },
+
+ computed: {
+    filteredResources (){
+      if(this.search){
+      return this.data.filter((item)=>{
+        return item.name.startsWith(this.search) + item.description.startsWith(this.search);
+      })
+      }else{
+        return this.data;
+      }
+    }
   }
+
 };
 </script>
